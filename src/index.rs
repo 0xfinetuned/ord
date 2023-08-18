@@ -134,20 +134,20 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
   }
 }
 
-pub(crate) struct Index {
-  client: Client,
-  database: Database,
-  path: PathBuf,
-  first_inscription_height: u64,
-  genesis_block_coinbase_transaction: Transaction,
-  genesis_block_coinbase_txid: Txid,
-  height_limit: Option<u64>,
-  options: Options,
-  unrecoverably_reorged: AtomicBool,
+pub struct Index {
+  pub client: Client,
+  pub database: Database,
+  pub path: PathBuf,
+  pub first_inscription_height: u64,
+  pub genesis_block_coinbase_transaction: Transaction,
+  pub genesis_block_coinbase_txid: Txid,
+  pub height_limit: Option<u64>,
+  pub options: Options,
+  pub unrecoverably_reorged: AtomicBool,
 }
 
 impl Index {
-  pub(crate) fn open(options: &Options) -> Result<Self> {
+  pub fn open(options: &Options) -> Result<Self> {
     let client = options.bitcoin_rpc_client()?;
 
     let path = if let Some(path) = &options.index {
@@ -394,7 +394,7 @@ impl Index {
     Ok(info)
   }
 
-  pub(crate) fn update(&self) -> Result {
+  pub fn update(&self) -> Result {
     let mut updater = Updater::new(self)?;
 
     loop {
@@ -528,7 +528,7 @@ impl Index {
       .unwrap_or(0)
   }
 
-  pub(crate) fn block_count(&self) -> Result<u64> {
+  pub fn block_count(&self) -> Result<u64> {
     self.begin_read()?.block_count()
   }
 
@@ -640,7 +640,7 @@ impl Index {
     Ok(ids)
   }
 
-  pub(crate) fn get_inscription_id_by_inscription_number(
+  pub fn get_inscription_id_by_inscription_number(
     &self,
     n: i64,
   ) -> Result<Option<InscriptionId>> {
@@ -654,7 +654,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn get_inscription_satpoint_by_id(
+  pub fn get_inscription_satpoint_by_id(
     &self,
     inscription_id: InscriptionId,
   ) -> Result<Option<SatPoint>> {
@@ -668,7 +668,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn get_inscription_by_id(
+  pub fn get_inscription_by_id(
     &self,
     inscription_id: InscriptionId,
   ) -> Result<Option<Inscription>> {
@@ -713,7 +713,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn get_transaction(&self, txid: Txid) -> Result<Option<Transaction>> {
+  pub fn get_transaction(&self, txid: Txid) -> Result<Option<Transaction>> {
     if txid == self.genesis_block_coinbase_txid {
       Ok(Some(self.genesis_block_coinbase_transaction.clone()))
     } else {
@@ -948,7 +948,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn get_inscription_entry(
+  pub fn get_inscription_entry(
     &self,
     inscription_id: InscriptionId,
   ) -> Result<Option<InscriptionEntry>> {

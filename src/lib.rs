@@ -98,7 +98,7 @@ macro_rules! tprintln {
 
 mod arguments;
 mod blocktime;
-mod chain;
+pub mod chain;
 mod config;
 mod decimal;
 mod degree;
@@ -106,12 +106,12 @@ mod deserialize_from_str;
 mod epoch;
 mod fee_rate;
 mod height;
-mod index;
+pub mod index;
 mod inscription;
 pub mod inscription_id;
 mod media;
 mod object;
-mod options;
+pub mod options;
 mod outgoing;
 mod page_config;
 pub mod rarity;
@@ -144,7 +144,7 @@ fn timestamp(seconds: u32) -> DateTime<Utc> {
   Utc.timestamp_opt(seconds.into(), 0).unwrap()
 }
 
-fn unbound_outpoint() -> OutPoint {
+pub fn unbound_outpoint() -> OutPoint {
   OutPoint {
     txid: Hash::all_zeros(),
     vout: 0,

@@ -6,60 +6,60 @@ use {super::*, bitcoincore_rpc::Auth};
     .required(false)
     .args(&["chain-argument", "signet", "regtest", "testnet"]),
 ))]
-pub(crate) struct Options {
+pub struct Options {
   #[clap(long, help = "Load Bitcoin Core data dir from <BITCOIN_DATA_DIR>.")]
-  pub(crate) bitcoin_data_dir: Option<PathBuf>,
+  pub bitcoin_data_dir: Option<PathBuf>,
   #[clap(long, help = "Authenticate to Bitcoin Core RPC with <RPC_PASS>.")]
-  pub(crate) bitcoin_rpc_pass: Option<String>,
+  pub bitcoin_rpc_pass: Option<String>,
   #[clap(long, help = "Authenticate to Bitcoin Core RPC as <RPC_USER>.")]
-  pub(crate) bitcoin_rpc_user: Option<String>,
+  pub bitcoin_rpc_user: Option<String>,
   #[clap(
     long = "chain",
     arg_enum,
     default_value = "mainnet",
     help = "Use <CHAIN>."
   )]
-  pub(crate) chain_argument: Chain,
+  pub chain_argument: Chain,
   #[clap(long, help = "Load configuration from <CONFIG>.")]
-  pub(crate) config: Option<PathBuf>,
+  pub config: Option<PathBuf>,
   #[clap(long, help = "Load configuration from <CONFIG_DIR>.")]
-  pub(crate) config_dir: Option<PathBuf>,
+  pub config_dir: Option<PathBuf>,
   #[clap(long, help = "Load Bitcoin Core RPC cookie file from <COOKIE_FILE>.")]
-  pub(crate) cookie_file: Option<PathBuf>,
+  pub cookie_file: Option<PathBuf>,
   #[clap(long, help = "Store index in <DATA_DIR>.")]
-  pub(crate) data_dir: Option<PathBuf>,
+  pub data_dir: Option<PathBuf>,
   #[clap(
     long,
     help = "Set index cache to <DB_CACHE_SIZE> bytes. By default takes 1/4 of available RAM."
   )]
-  pub(crate) db_cache_size: Option<usize>,
+  pub db_cache_size: Option<usize>,
   #[clap(
     long,
     help = "Don't look for inscriptions below <FIRST_INSCRIPTION_HEIGHT>."
   )]
-  pub(crate) first_inscription_height: Option<u64>,
+  pub first_inscription_height: Option<u64>,
   #[clap(long, help = "Limit index to <HEIGHT_LIMIT> blocks.")]
-  pub(crate) height_limit: Option<u64>,
+  pub height_limit: Option<u64>,
   #[clap(long, help = "Use index at <INDEX>.")]
-  pub(crate) index: Option<PathBuf>,
+  pub index: Option<PathBuf>,
   #[clap(long, help = "Track location of all satoshis.")]
-  pub(crate) index_sats: bool,
+  pub index_sats: bool,
   #[clap(long, short, help = "Use regtest. Equivalent to `--chain regtest`.")]
-  pub(crate) regtest: bool,
+  pub regtest: bool,
   #[clap(long, help = "Connect to Bitcoin Core RPC at <RPC_URL>.")]
-  pub(crate) rpc_url: Option<String>,
+  pub rpc_url: Option<String>,
   #[clap(long, short, help = "Use signet. Equivalent to `--chain signet`.")]
-  pub(crate) signet: bool,
+  pub signet: bool,
   #[clap(long, short, help = "Use testnet. Equivalent to `--chain testnet`.")]
-  pub(crate) testnet: bool,
+  pub testnet: bool,
   #[clap(long, default_value = "ord", help = "Use wallet named <WALLET>.")]
-  pub(crate) wallet: String,
+  pub wallet: String,
   #[clap(long, short, help = "Enable JSON API.")]
-  pub(crate) enable_json_api: bool,
+  pub enable_json_api: bool,
 }
 
 impl Options {
-  pub(crate) fn chain(&self) -> Chain {
+  pub fn chain(&self) -> Chain {
     if self.signet {
       Chain::Signet
     } else if self.regtest {
@@ -117,7 +117,7 @@ impl Options {
     Ok(path.join(".cookie"))
   }
 
-  pub(crate) fn data_dir(&self) -> Result<PathBuf> {
+  pub fn data_dir(&self) -> Result<PathBuf> {
     let base = match &self.data_dir {
       Some(base) => base.clone(),
       None => dirs::data_dir()
