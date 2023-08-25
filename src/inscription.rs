@@ -29,10 +29,10 @@ pub struct Inscription {
 }
 
 #[derive(Debug, PartialEq, Clone)]
-pub(crate) struct TransactionInscription {
-  pub(crate) inscription: Inscription,
-  pub(crate) tx_in_index: u32,
-  pub(crate) tx_in_offset: u32,
+pub struct TransactionInscription {
+  pub inscription: Inscription,
+  pub tx_in_index: u32,
+  pub tx_in_offset: u32,
 }
 
 impl Inscription {
@@ -41,7 +41,7 @@ impl Inscription {
     Self { content_type, body }
   }
 
-  pub(crate) fn from_transaction(tx: &Transaction) -> Vec<TransactionInscription> {
+  pub fn from_transaction(tx: &Transaction) -> Vec<TransactionInscription> {
     let mut result = Vec::new();
     for (index, tx_in) in tx.input.iter().enumerate() {
       let Ok(inscriptions) = InscriptionParser::parse(&tx_in.witness) else { continue };
