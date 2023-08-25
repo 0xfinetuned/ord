@@ -1,10 +1,10 @@
 use super::*;
 
 #[derive(Copy, Clone, Debug, Display, FromStr, Ord, Eq, Serialize, PartialEq, PartialOrd)]
-pub(crate) struct Height(pub(crate) u64);
+pub struct Height(pub u64);
 
 impl Height {
-  pub(crate) fn n(self) -> u64 {
+  pub fn n(self) -> u64 {
     self.0
   }
 
