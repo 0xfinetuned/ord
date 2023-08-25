@@ -136,12 +136,13 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
 pub struct Index {
   pub client: Client,
   pub database: Database,
-  pub path: PathBuf,
+  pub durability: redb::Durability,
   pub first_inscription_height: u64,
   pub genesis_block_coinbase_transaction: Transaction,
   pub genesis_block_coinbase_txid: Txid,
   pub height_limit: Option<u64>,
   pub options: Options,
+  pub path: PathBuf,
   pub unrecoverably_reorged: AtomicBool,
 }
 
