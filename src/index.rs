@@ -546,7 +546,7 @@ impl Index {
     self.begin_read()?.block_count()
   }
 
-  pub(crate) fn block_height(&self) -> Result<Option<Height>> {
+  pub fn block_height(&self) -> Result<Option<Height>> {
     self.begin_read()?.block_height()
   }
 
