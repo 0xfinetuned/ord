@@ -133,7 +133,6 @@ impl<T> BitcoinCoreRpcResultExt<T> for Result<T, bitcoincore_rpc::Error> {
     }
   }
 }
-
 pub struct Index {
   pub client: Client,
   pub database: Database,

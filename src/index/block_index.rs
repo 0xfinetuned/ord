@@ -10,7 +10,7 @@ pub struct BlockIndex {
 }
 
 impl BlockIndex {
-  pub(crate) fn new(index: &Index) -> Result<BlockIndex> {
+  pub fn new(index: &Index) -> Result<BlockIndex> {
     Ok(BlockIndex {
       first_inscription_height: index.options.first_inscription_height(),
       lowest_blessed_by_block: Vec::new(),
