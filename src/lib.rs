@@ -107,7 +107,7 @@ mod epoch;
 mod fee_rate;
 mod height;
 pub mod index;
-mod inscription;
+pub mod inscription;
 pub mod inscription_id;
 mod media;
 mod object;
