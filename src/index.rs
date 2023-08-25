@@ -940,7 +940,7 @@ impl Index {
     Ok((inscriptions, prev, next, lowest, highest))
   }
 
-  pub(crate) fn get_inscriptions_in_block(
+  pub fn get_inscriptions_in_block(
     &self,
     block_index: &BlockIndex,
     block_height: u64,
