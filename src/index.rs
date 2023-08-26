@@ -613,7 +613,7 @@ impl Index {
     self.client.get_block_header_info(&hash).into_option()
   }
 
-  pub(crate) fn get_block_by_height(&self, height: u64) -> Result<Option<Block>> {
+  pub fn get_block_by_height(&self, height: u64) -> Result<Option<Block>> {
     Ok(
       self
         .client
@@ -624,7 +624,7 @@ impl Index {
     )
   }
 
-  pub(crate) fn get_block_by_hash(&self, hash: BlockHash) -> Result<Option<Block>> {
+  pub fn get_block_by_hash(&self, hash: BlockHash) -> Result<Option<Block>> {
     self.client.get_block(&hash).into_option()
   }
 
