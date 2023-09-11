@@ -1,60 +1,60 @@
 use {super::*, bitcoincore_rpc::Auth};
 
 #[derive(Clone, Default, Debug, Parser)]
-#[clap(group(
+#[command(group(
   ArgGroup::new("chains")
     .required(false)
-    .args(&["chain-argument", "signet", "regtest", "testnet"]),
+    .args(&["chain_argument", "signet", "regtest", "testnet"]),
 ))]
 pub struct Options {
-  #[clap(long, help = "Load Bitcoin Core data dir from <BITCOIN_DATA_DIR>.")]
+  #[arg(long, help = "Load Bitcoin Core data dir from <BITCOIN_DATA_DIR>.")]
   pub bitcoin_data_dir: Option<PathBuf>,
-  #[clap(long, help = "Authenticate to Bitcoin Core RPC with <RPC_PASS>.")]
+  #[arg(long, help = "Authenticate to Bitcoin Core RPC with <RPC_PASS>.")]
   pub bitcoin_rpc_pass: Option<String>,
-  #[clap(long, help = "Authenticate to Bitcoin Core RPC as <RPC_USER>.")]
+  #[arg(long, help = "Authenticate to Bitcoin Core RPC as <RPC_USER>.")]
   pub bitcoin_rpc_user: Option<String>,
-  #[clap(
+  #[arg(
     long = "chain",
-    arg_enum,
+    value_enum,
     default_value = "mainnet",
     help = "Use <CHAIN>."
   )]
   pub chain_argument: Chain,
-  #[clap(long, help = "Load configuration from <CONFIG>.")]
+  #[arg(long, help = "Load configuration from <CONFIG>.")]
   pub config: Option<PathBuf>,
-  #[clap(long, help = "Load configuration from <CONFIG_DIR>.")]
+  #[arg(long, help = "Load configuration from <CONFIG_DIR>.")]
   pub config_dir: Option<PathBuf>,
-  #[clap(long, help = "Load Bitcoin Core RPC cookie file from <COOKIE_FILE>.")]
+  #[arg(long, help = "Load Bitcoin Core RPC cookie file from <COOKIE_FILE>.")]
   pub cookie_file: Option<PathBuf>,
-  #[clap(long, help = "Store index in <DATA_DIR>.")]
+  #[arg(long, help = "Store index in <DATA_DIR>.")]
   pub data_dir: Option<PathBuf>,
-  #[clap(
+  #[arg(
     long,
     help = "Set index cache to <DB_CACHE_SIZE> bytes. By default takes 1/4 of available RAM."
   )]
   pub db_cache_size: Option<usize>,
-  #[clap(
+  #[arg(
     long,
     help = "Don't look for inscriptions below <FIRST_INSCRIPTION_HEIGHT>."
   )]
   pub first_inscription_height: Option<u64>,
-  #[clap(long, help = "Limit index to <HEIGHT_LIMIT> blocks.")]
+  #[arg(long, help = "Limit index to <HEIGHT_LIMIT> blocks.")]
   pub height_limit: Option<u64>,
-  #[clap(long, help = "Use index at <INDEX>.")]
+  #[arg(long, help = "Use index at <INDEX>.")]
   pub index: Option<PathBuf>,
-  #[clap(long, help = "Track location of all satoshis.")]
+  #[arg(long, help = "Track location of all satoshis.")]
   pub index_sats: bool,
-  #[clap(long, short, help = "Use regtest. Equivalent to `--chain regtest`.")]
+  #[arg(long, short, help = "Use regtest. Equivalent to `--chain regtest`.")]
   pub regtest: bool,
-  #[clap(long, help = "Connect to Bitcoin Core RPC at <RPC_URL>.")]
+  #[arg(long, help = "Connect to Bitcoin Core RPC at <RPC_URL>.")]
   pub rpc_url: Option<String>,
-  #[clap(long, short, help = "Use signet. Equivalent to `--chain signet`.")]
+  #[arg(long, short, help = "Use signet. Equivalent to `--chain signet`.")]
   pub signet: bool,
-  #[clap(long, short, help = "Use testnet. Equivalent to `--chain testnet`.")]
+  #[arg(long, short, help = "Use testnet. Equivalent to `--chain testnet`.")]
   pub testnet: bool,
-  #[clap(long, default_value = "ord", help = "Use wallet named <WALLET>.")]
+  #[arg(long, default_value = "ord", help = "Use wallet named <WALLET>.")]
   pub wallet: String,
-  #[clap(long, short, help = "Enable JSON API.")]
+  #[arg(long, short, help = "Enable JSON API.")]
   pub enable_json_api: bool,
 }
 
